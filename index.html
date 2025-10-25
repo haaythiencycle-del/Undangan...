@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Invitation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: url('cover.png') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      animation: fadeInBg 1.8s ease-in-out forwards;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 18px;
+      animation: fadeInText 1.4s ease forwards 0.3s;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: #ffffff;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      margin-bottom: 25px;
+      animation: fadeInText 1.4s ease forwards 0.6s;
+    }
+
+    .tamu {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 40px;
+      font-weight: 500;
+      animation: fadeInText 1.4s ease forwards 0.9s;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    a.btn {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.85);
+      color: #3e3e3e;
+      text-decoration: none;
+      padding: 12px 38px;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: 0.4s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      animation: fadeInText 1.4s ease forwards 1.2s;
+    }
+
+    a.btn:hover {
+      transform: scale(1.08);
+      background: #ffffff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    /* Transisi keluar sebelum pindah halaman */
+    .fade-out {
+      animation: fadeOutPage 0.8s ease forwards;
+    }
+
+    @keyframes fadeOutPage {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.96); }
+    }
+
+    audio { display: none; }
+
+    @keyframes fadeInBg {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="subtitle">WEDDING INVITATION</div>
+  <h1>Dimas & Risa</h1>
+  <div class="tamu" id="namaTamu">Kepada Yth.</div>
+  <a id="bukaUndangan" class="btn" href="#" target="_blank">Buka Undangan</a>
+
+  <audio id="musik" src="musik.mp3" loop></audio>
+
+  <script>
+    // Ambil parameter nama dari URL
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get("nama");
+    const namaEl = document.getElementById("namaTamu");
+    if (nama) {
+      namaEl.textContent = `Kepada Yth. ${decodeURIComponent(nama)}`;
+    }
+
+    // Link undangan Canva kamu
+    const linkCanva = "https://raifanazwa.my.canva.site/marinikah";
+
+    const tombol = document.getElementById("bukaUndangan");
+    const musik = document.getElementById("musik");
+
+    tombol.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.body.classList.add("fade-out");
+      musik.play().catch(() => {});
+      setTimeout(() => {
+        window.location.href = linkCanva;
+      }, 800);
+    });
+  </script>
+</body>
+</html>
